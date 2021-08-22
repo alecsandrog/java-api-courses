@@ -24,7 +24,7 @@ public class DepartmentService {
 		return repository.findAll();
 	}
 
-	public Department findById(int id) {
+	public Department findById(Long id) {
 		Optional<Department> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
@@ -33,7 +33,7 @@ public class DepartmentService {
 		return repository.save(obj);
 	}
 
-	public void delete(int id) {
+	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
@@ -43,7 +43,7 @@ public class DepartmentService {
 		}
 	}
 
-	public Department update(int id, Department obj) {
+	public Department update(Long id, Department obj) {
 		try {
 			Department entity = repository.getById(id);
 			updateData(entity, obj);

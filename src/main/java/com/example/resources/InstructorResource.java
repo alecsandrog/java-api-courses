@@ -15,29 +15,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.entities.Department;
-import com.example.services.DepartmentService;
+import com.example.entities.Instructor;
+import com.example.services.InstructorService;
 
 @RestController
-@RequestMapping(value = "/departments")
-public class DepartmentResource {
+@RequestMapping(value = "/instructors")
+public class InstructorResource {
 	@Autowired
-	private DepartmentService service;
+	private InstructorService service;
 
 	@GetMapping
-	public ResponseEntity<List<Department>> findAll() {
-		List<Department> list = service.findAll();
+	public ResponseEntity<List<Instructor>> findAll() {
+		List<Instructor> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Department> findById(@PathVariable Long id) {
-		Department obj = service.findById(id);
+	public ResponseEntity<Instructor> findById(@PathVariable Long id) {
+		Instructor obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
 	@PostMapping
-	public ResponseEntity<Department> insert(@RequestBody Department obj) {
+	public ResponseEntity<Instructor> insert(@RequestBody Instructor obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).body(obj);
@@ -50,8 +50,14 @@ public class DepartmentResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Department> update(@PathVariable Long id, @RequestBody Department obj) {
+	public ResponseEntity<Instructor> update(@PathVariable Long id, @RequestBody Instructor obj) {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
+	}
+
+	@GetMapping("/department/{id}")
+	public ResponseEntity<List<Instructor>> getInstructorByDepartments(@PathVariable Long id) {
+		List<Instructor> list = service.getInstructorsByDepartment(id);
+		return ResponseEntity.ok().body(list);
 	}
 }
