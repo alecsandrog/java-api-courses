@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.entities.Course;
 import com.example.entities.Department;
-import com.example.entities.Instructor;
 import com.example.repositories.CourseRepository;
 import com.example.repositories.DepartmentRepository;
 import com.example.services.exceptions.DatabaseException;
