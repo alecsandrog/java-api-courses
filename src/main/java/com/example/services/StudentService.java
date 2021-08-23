@@ -25,7 +25,7 @@ public class StudentService {
 		return repository.findAll();
 	}
 
-	public Student findById(int id) {
+	public Student findById(Long id) {
 		Optional<Student> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(obj));
 	}
@@ -34,7 +34,7 @@ public class StudentService {
 		return repository.save(obj);
 	}
 
-	public void delete(int id) {
+	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
@@ -44,7 +44,7 @@ public class StudentService {
 		}
 	}
 
-	public Student update(int id, Student obj) {
+	public Student update(Long id, Student obj) {
 		try {
 			Student entity = repository.getById(id);
 			updateData(entity, obj);
@@ -58,6 +58,7 @@ public class StudentService {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
 		entity.setCpf(obj.getCpf());
+		entity.setCourse(obj.getCourse());
 	}
 
 }
